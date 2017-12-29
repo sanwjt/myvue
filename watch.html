@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div id="app">
+    <input type="text" v-model="a">
+    {{msg}}
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el : '#app',
+        data : {
+            a : '',
+            msg :'',
+
+        },
+        watch : { //watch 监听的数据在data里已经被定义，watch支持异步，computed不支持异步，监听的数据变化时才会变化
+            a () {
+                this.msg = '请进行验证'；
+                window.setTimeout(()=>{
+                    if (this.a.length >= 5) {
+                        return "成功"
+                    }else {
+                        return "太少了"
+                    }
+                },2000)
+            }
+        }
+    });
+</script>
+</body>
+</html>
